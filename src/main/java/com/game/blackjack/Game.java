@@ -17,7 +17,7 @@ public class Game extends Application {
     @FXML
     private static boolean keepturn = true;
     @FXML
-    private static boolean gamekeep = true;
+    private static boolean gamekeep = false;
     private static int playerCard = 0;
     private static int player2Card = 0;
     private static int testvalue; //对手逻辑
@@ -105,27 +105,7 @@ public class Game extends Application {
         cardset.put(21,p8); cardset.put(22,p9); cardset.put(23,p10); cardset.put(24,pj);
         cardset.put(25,pq); cardset.put(26,pk);
 
-        Random r = new Random();
-        testvalue = r.nextInt(4)+14; //对手逻辑
-
-        //第一张牌
-        int rnum1 = r.nextInt(26)+1;
-        int num = getNum(rnum1); //得到点数
-        player.add(num);
-        checkRepeat.add(rnum1);
-        playerCard = 1;
-        //敌人需要防止重复
-        int rnum2 = getNoRep(checkRepeat);
-        int num2 = getNum(rnum2);
-        player2.add(num2);
-        checkRepeat.add(rnum2);
-        flipp2.add(rnum2);
-        player2Card = 1;
-
-        //为啥不显示啊！！
-        setScore();
-        p1c1.setImage(cardset.get(rnum1));
-        p2c1.setImage(cardset.get(rnum2));
+        gamekeep = false;
 
         Scene sc = new Scene(fx.load());
         primaryStage.setTitle("Black Jack");
@@ -235,7 +215,7 @@ public class Game extends Application {
                 gamekeep = false;
             }
         }else{
-            warnLabel.setText("Already Gameover");
+            warnLabel.setText("Please Start New Turn");
         }
     }
 
@@ -277,7 +257,7 @@ public class Game extends Application {
             }
             gamekeep = false;
         }else{
-            warnLabel.setText("Already Gameover");
+            warnLabel.setText("Please Start New Turn");
         }
     }
 

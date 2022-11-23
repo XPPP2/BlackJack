@@ -21,11 +21,11 @@
       <ImageView fx:id="p1c4" fitHeight="98.0" fitWidth="70.0" layoutX="284.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p1c5" fitHeight="98.0" fitWidth="70.0" layoutX="301.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="p1c6" fitHeight="98.0" fitWidth="70.0" layoutX="321.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="warnLabel" alignment="CENTER" layoutX="176.0" layoutY="176.0" prefHeight="36.0" prefWidth="253.0">
+      <Label fx:id="warnLabel" alignment="CENTER" layoutX="167.0" layoutY="176.0" prefHeight="36.0" prefWidth="253.0" text="Please Start New Turn">
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button layoutX="513.0" layoutY="354.0" mnemonicParsing="false" onAction="#restart" text="Restart" />
+      <Button layoutX="244.0" layoutY="14.0" mnemonicParsing="false" onAction="#restart" text="Start New Turn" />
       <Label fx:id="score" layoutX="472.0" layoutY="155.0" prefHeight="78.0" prefWidth="114.0">
          <font>
             <Font size="15.0" />
