@@ -15,19 +15,19 @@ import java.util.Random;
 
 public class Game extends Application {
     @FXML
-    private static boolean keepturn = true;
+    private static boolean keepturn = true; //是否stand，感觉没啥用，总之先用着
     @FXML
-    private static boolean gamekeep = false;
-    private static int playerCard = 0;
-    private static int player2Card = 0;
+    private static boolean gamekeep = false; //是否结束游戏
+    private static int playerCard = 0; //玩家目前卡片数量，用来确定卡片图片放在第几个位置
+    private static int player2Card = 0; //敌人卡片数量
     private static int testvalue; //对手逻辑
     @FXML
-    private Label warnLabel = new Label();
+    private Label warnLabel = new Label(); //用来显示提示语
     @FXML
-    private Label score = new Label();
-    private static ArrayList<Integer> player = new ArrayList<Integer>();
-    private static ArrayList<Integer> player2 = new ArrayList<Integer>();
-    //图片
+    private Label score = new Label(); //显示分数
+    private static ArrayList<Integer> player = new ArrayList<Integer>(); //玩家卡片数值
+    private static ArrayList<Integer> player2 = new ArrayList<Integer>(); //对手卡片数值
+    //图片们
     private final Image la = new Image(getClass().getResourceAsStream("/image/la.png"));
     private final Image l2 = new Image(getClass().getResourceAsStream("/image/l2.png"));
     private final Image l3 = new Image(getClass().getResourceAsStream("/image/l3.png"));
@@ -55,7 +55,7 @@ public class Game extends Application {
     private final Image pq = new Image(getClass().getResourceAsStream("/image/pq.png"));
     private final Image pk = new Image(getClass().getResourceAsStream("/image/pk.png"));
     private final Image back = new Image(getClass().getResourceAsStream("/image/back.png"));
-
+    // 用来对应随机点数和图片
     private static HashMap<Integer,Image> cardset = new HashMap<Integer, Image>();
 
     //图片放置点
@@ -83,9 +83,9 @@ public class Game extends Application {
     private ImageView p2c5 = new ImageView();
     @FXML
     private ImageView p2c6 = new ImageView();
-    //牌号，防止重复
+    //记录牌号，防止重复
     private static ArrayList<Integer> checkRepeat = new ArrayList<Integer>();
-    //结束p2翻牌
+    //记录p2牌号，结束时p2翻牌
     private static ArrayList<Integer> flipp2 = new ArrayList<Integer>();
 
     public static void main(String[] args) {
@@ -95,7 +95,7 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fx = new FXMLLoader(getClass().getResource("GameFxml.fxml"));
-        //图片设置
+        //图片hashmap，点数对应图片
         cardset.put(0,back);
         cardset.put(1,la); cardset.put(2,l2); cardset.put(3,l3); cardset.put(4,l4);
         cardset.put(5,l5); cardset.put(6,l6); cardset.put(7,l7); cardset.put(8,l8);
@@ -105,6 +105,7 @@ public class Game extends Application {
         cardset.put(21,p8); cardset.put(22,p9); cardset.put(23,p10); cardset.put(24,pj);
         cardset.put(25,pq); cardset.put(26,pk);
 
+        // 刚开局强制要求点new turn，因为第一局就开始游戏的话有bug，我不会解决
         gamekeep = false;
 
         Scene sc = new Scene(fx.load());
@@ -115,6 +116,7 @@ public class Game extends Application {
 
     }
 
+    //确定哪个位置放什么牌
     public void whichCard(int index,int player,int num){
         if(player==1){
             if(index == 1){
@@ -147,11 +149,13 @@ public class Game extends Application {
         }
     }
 
+    //score label显示分数，用在结算时
     public void setScore(){
         score.setText("P2's score:"+sumArr(player2)
                 +"\nYour score:"+sumArr(player));
     }
 
+    //获取一个不和 checkRepeat Arraylist 重复的随机数
     public static int getNoRep(ArrayList check){
         Random r = new Random();
         int rnum = r.nextInt(26)+1;
@@ -261,7 +265,7 @@ public class Game extends Application {
         }
     }
 
-    //结束后把敌人的卡翻过来(配合花色防重复）
+    //结束后把敌人的卡翻过来）
     public void flipcard(){
         int index = 1;
         for(int j:flipp2){
@@ -270,6 +274,7 @@ public class Game extends Application {
         }
     }
 
+    //朴实无华的把所有数据全初始化
     @FXML
     public void restart(){
         Random r = new Random();
