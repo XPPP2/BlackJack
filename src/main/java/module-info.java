@@ -1,8 +1,8 @@
-module com.igame.blackjack {
+module com.game.blackjack {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens com.igame.blackjack to javafx.fxml;
-    exports com.igame.blackjack;
+    opens com.game.blackjack to javafx.fxml;
+    exports com.game.blackjack;
 }
