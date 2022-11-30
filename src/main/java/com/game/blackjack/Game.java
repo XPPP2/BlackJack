@@ -1,5 +1,6 @@
 package com.game.blackjack;
 
+import com.game.blackjack.controllers.G1M2Controller;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -126,16 +127,26 @@ public class Game extends Application {
     //改变场景
     @FXML
     public void goG2() throws Exception{
-        Game2 g = new Game2();
+        mp.stop();
+        G1M2 g = new G1M2();
         stage.close();
-        g.start(stage); //不然stage会是null，虽然好像也可以用initializable但是我偷工减料了（
+        //图片hashmap，点数对应图片
+        G1M2Controller.cardset.put(0,back);
+        G1M2Controller.cardset.put(1,la); G1M2Controller.cardset.put(2,l2); G1M2Controller.cardset.put(3,l3); G1M2Controller.cardset.put(4,l4);
+        G1M2Controller.cardset.put(5,l5); G1M2Controller.cardset.put(6,l6); G1M2Controller.cardset.put(7,l7); G1M2Controller.cardset.put(8,l8);
+        G1M2Controller.cardset.put(9,l9); G1M2Controller.cardset.put(10,l10); G1M2Controller.cardset.put(11,lj); G1M2Controller.cardset.put(12,lq);
+        G1M2Controller.cardset.put(13,lk); G1M2Controller.cardset.put(14,pa); G1M2Controller.cardset.put(15,p2); G1M2Controller.cardset.put(16,p3);
+        G1M2Controller.cardset.put(17,p4); G1M2Controller.cardset.put(18,p5); G1M2Controller.cardset.put(19,p6); G1M2Controller.cardset.put(20,p7);
+        G1M2Controller.cardset.put(21,p8); G1M2Controller.cardset.put(22,p9); G1M2Controller.cardset.put(23,p10); G1M2Controller.cardset.put(24,pj);
+        G1M2Controller.cardset.put(25,pq); G1M2Controller.cardset.put(26,pk);
+        g.goG1M2();
     }
     @FXML
     public void goBack() throws Exception{
         mp.stop();
         ChooseMode g = new ChooseMode();
         stage.close();
-        g.start(stage); //不然stage会是null，虽然好像也可以用initializable但是我偷工减料了（
+        g.start(stage);
     }
 
     //确定哪个位置放什么牌

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.game.blackjack.controllers.G1M2Controller">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#402c25" height="400.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+        <Ellipse fill="#684f4b" layoutX="300.0" layoutY="155.0" radiusX="349.0" radiusY="256.0" stroke="#837250" strokeType="INSIDE" />
+        <Ellipse fill="#68e49e" layoutX="300.0" layoutY="113.0" radiusX="336.0" radiusY="266.0" stroke="#caf8e9" strokeType="INSIDE" />
+        <Button layoutX="161.0" layoutY="222.0" mnemonicParsing="false" onAction="#hit" prefHeight="25.0" prefWidth="70.0" text="HIT" />
+        <Button layoutX="370.0" layoutY="222.0" mnemonicParsing="false" onAction="#stand" prefHeight="26.0" prefWidth="70.0" text="STAND" />
+        <ImageView fx:id="p1c1" fitHeight="99.0" fitWidth="70.0" layoutX="231.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p1c2" fitHeight="98.0" fitWidth="70.0" layoutX="249.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p1c3" fitHeight="119.0" fitWidth="70.0" layoutX="266.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p1c4" fitHeight="98.0" fitWidth="70.0" layoutX="284.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p1c5" fitHeight="98.0" fitWidth="70.0" layoutX="301.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p1c6" fitHeight="98.0" fitWidth="70.0" layoutX="321.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="warnLabel" alignment="CENTER" layoutX="167.0" layoutY="176.0" prefHeight="36.0" prefWidth="253.0" text="Please Start New Turn">
+            <font>
+                <Font size="20.0" />
+            </font></Label>
+        <Button layoutX="487.0" layoutY="353.0" mnemonicParsing="false" onAction="#restart" text="Start New Turn" />
+        <Label fx:id="score" layoutX="472.0" layoutY="155.0" prefHeight="78.0" prefWidth="114.0">
+            <font>
+                <Font size="15.0" />
+            </font></Label>
+        <ImageView fx:id="p2c1" fitHeight="98.0" fitWidth="70.0" layoutX="231.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c2" fitHeight="98.0" fitWidth="70.0" layoutX="249.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c3" fitHeight="99.0" fitWidth="70.0" layoutX="269.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c4" fitHeight="99.0" fitWidth="70.0" layoutX="286.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c5" fitHeight="98.0" fitWidth="67.0" layoutX="303.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c6" fitHeight="99.0" fitWidth="70.0" layoutX="319.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <Button layoutX="20.0" layoutY="353.0" mnemonicParsing="false" onAction="#goG2" text="Change Mode" />
+        <Button layoutX="20.0" layoutY="312.0" mnemonicParsing="false" onAction="#clickHelp" prefHeight="26.0" prefWidth="52.0" text="Help" />
+        <ImageView fx:id="help1" disable="true" fitHeight="261.0" fitWidth="377.0" layoutX="116.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
+        <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+      <Label fx:id="tScore" layoutX="440.0" layoutY="14.0" prefHeight="19.0" prefWidth="154.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+    </children>
+</Pane>

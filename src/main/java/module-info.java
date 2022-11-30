@@ -5,5 +5,6 @@ module com.game.blackjack {
 
 
     opens com.game.blackjack to javafx.fxml;
+    opens com.game.blackjack.controllers to javafx.fxml;
     exports com.game.blackjack;
 }
