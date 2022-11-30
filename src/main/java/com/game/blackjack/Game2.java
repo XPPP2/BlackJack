@@ -4,12 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -90,10 +92,15 @@ public class Game2 extends Application {
     private boolean helpdisplay = false; //规则页面是否显示
     //记录牌号，防止重复
     private static ArrayList<Integer> checkRepeat = new ArrayList<Integer>();
+    private static Media m = new Media(new File("src/main/resources/music/6199.mp3").toURI().toString());
+    public static MediaPlayer mp = new MediaPlayer(m);
+    private static Media m2 = new Media(new File("src/main/resources/music/exp-1688.wav").toURI().toString());
+    public static MediaPlayer ex = new MediaPlayer(m2);
 
     public static void main(String[] args) {
         launch(args);
     }
+    //音乐
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -113,6 +120,9 @@ public class Game2 extends Application {
         // 刚开局强制要求点new turn，因为第一局就开始游戏的话有bug，我不会解决
         gamekeep = false;
 
+        mp.setCycleCount(MediaPlayer.INDEFINITE);
+        mp.play();
+
         Scene sc2 = new Scene(fx2.load());
 
         primaryStage.setTitle("Black Jack Mode 2");
@@ -129,9 +139,10 @@ public class Game2 extends Application {
     }
     @FXML
     public void goBack() throws Exception{
+        mp.stop();
         ChooseMode g = new ChooseMode();
         stage.close();
-        g.start(stage); //不然stage会是null，虽然好像也可以用initializable但是我偷工减料了（
+        g.start(stage);
     }
 
     //确定哪个位置放什么牌，index从1开始
@@ -225,7 +236,9 @@ public class Game2 extends Application {
             playerCard += 1;
             whichCard(playerCard, 1, rnum1); //更新卡片
             ifchangeA(player,1); //是否需要change A
+
             if (ifExplode(player,1)) {//检查玩家是否超过21
+                ex.play();
                 warnLabel.setText("You Explode, You Lose!");
                 flipcard();
                 setFinalScore();
@@ -240,6 +253,7 @@ public class Game2 extends Application {
                     whichCard(player2Card, 2, rnum2); //更新卡片
                     ifchangeA(player2,2);
                     if (ifExplode(player2,2)) {//检查对手是否超过21
+                        ex.play();
                         warnLabel.setText("P2 Explode, You Win!");
                         flipcard();
                         setFinalScore();
@@ -273,6 +287,7 @@ public class Game2 extends Application {
 
             //结算输赢
             if (ifExplode(player2,2)) {
+                ex.play();
                 warnLabel.setText("P2 Explode, You Win!");
                 flipcard();
                 setFinalScore();
@@ -298,6 +313,7 @@ public class Game2 extends Application {
     //朴实无华的把所有数据全初始化
     @FXML
     public void restart() {
+        ex.stop();
         Random r = new Random();
         gamekeep = true;
         testvalue = r.nextInt(4)+14;
