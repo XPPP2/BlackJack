@@ -22,7 +22,7 @@
         </Label>
         <Button mnemonicParsing="false" onAction="#goG1" prefHeight="33.0" prefWidth="110.0" text="Mode 1 (Easy)" />
         <Button mnemonicParsing="false" onAction="#goG2" prefHeight="34.0" prefWidth="124.0" text="Mode 2 (Midium)" />
-        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="57.0" text="Back">
+        <Button mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="57.0" text="Back">
             <VBox.margin>
                 <Insets />
             </VBox.margin>

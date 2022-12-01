@@ -1,5 +1,6 @@
 package com.game.blackjack.controllers;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,9 +12,9 @@ public abstract class MainControl {
     //score label显示分数，用在结算时
     public abstract void setScore();
 
-    public abstract void hit();
-    public abstract void stand();
-    public abstract void restart();
+    public abstract void hit() throws Exception;
+    public abstract void stand() throws Exception;
+    public abstract void restart() throws Exception;
 
     //结束后把敌人的卡翻过来
     public abstract void flipcard();

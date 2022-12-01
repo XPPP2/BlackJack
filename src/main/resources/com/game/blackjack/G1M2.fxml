@@ -26,24 +26,45 @@
                 <Font size="20.0" />
             </font></Label>
         <Button layoutX="487.0" layoutY="353.0" mnemonicParsing="false" onAction="#restart" text="Start New Turn" />
-        <Label fx:id="score" layoutX="472.0" layoutY="155.0" prefHeight="78.0" prefWidth="114.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c0fff5" height="99.0" layoutX="487.0" layoutY="9.0" stroke="#8bbfd0" strokeLineCap="ROUND" strokeType="INSIDE" width="107.0" />
+        <Label fx:id="score" layoutX="492.0" layoutY="16.0" prefHeight="86.0" prefWidth="99.0">
             <font>
-                <Font size="15.0" />
+                <Font size="14.0" />
             </font></Label>
-        <ImageView fx:id="p2c1" fitHeight="98.0" fitWidth="70.0" layoutX="231.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="p2c2" fitHeight="98.0" fitWidth="70.0" layoutX="249.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="p2c3" fitHeight="99.0" fitWidth="70.0" layoutX="269.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="p2c4" fitHeight="99.0" fitWidth="70.0" layoutX="286.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="p2c5" fitHeight="98.0" fitWidth="67.0" layoutX="303.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fx:id="p2c6" fitHeight="99.0" fitWidth="70.0" layoutX="319.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c1" fitHeight="98.0" fitWidth="70.0" layoutX="205.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c2" fitHeight="98.0" fitWidth="70.0" layoutX="223.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c3" fitHeight="99.0" fitWidth="70.0" layoutX="243.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c4" fitHeight="99.0" fitWidth="70.0" layoutX="260.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c5" fitHeight="98.0" fitWidth="67.0" layoutX="277.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="p2c6" fitHeight="99.0" fitWidth="70.0" layoutX="293.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutX="421.0" rotate="90.0" stroke="#d0dcdd" strokeType="INSIDE" width="24.0" />
         <Button layoutX="20.0" layoutY="353.0" mnemonicParsing="false" onAction="#goG2" text="Change Mode" />
         <Button layoutX="20.0" layoutY="312.0" mnemonicParsing="false" onAction="#clickHelp" prefHeight="26.0" prefWidth="52.0" text="Help" />
         <ImageView fx:id="help1" disable="true" fitHeight="261.0" fitWidth="377.0" layoutX="116.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
         <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
-      <Label fx:id="tScore" layoutX="440.0" layoutY="14.0" prefHeight="19.0" prefWidth="154.0">
+      <ImageView fx:id="p3c1" fitHeight="98.0" fitWidth="70.0" layoutX="37.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p3c2" fitHeight="98.0" fitWidth="70.0" layoutX="37.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p3c3" fitHeight="99.0" fitWidth="70.0" layoutX="37.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p3c4" fitHeight="99.0" fitWidth="70.0" layoutX="37.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p3c5" fitHeight="98.0" fitWidth="67.0" layoutX="39.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p3c6" fitHeight="99.0" fitWidth="70.0" layoutX="38.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#c2fcff" height="26.0" layoutX="75.0" layoutY="15.0" stroke="#a0d3cd" strokeType="INSIDE" width="162.0" />
+      <Label fx:id="tScore" layoutX="84.0" layoutY="19.0" prefHeight="19.0" prefWidth="154.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <ImageView fx:id="p4c1" fitHeight="98.0" fitWidth="70.0" layoutX="492.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p4c2" fitHeight="98.0" fitWidth="70.0" layoutX="492.0" layoutY="134.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p4c3" fitHeight="99.0" fitWidth="70.0" layoutX="492.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p4c4" fitHeight="99.0" fitWidth="70.0" layoutX="492.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p4c5" fitHeight="98.0" fitWidth="67.0" layoutX="494.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="p4c6" fitHeight="99.0" fitWidth="70.0" layoutX="493.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutY="165.0" stroke="#d0dcdd" strokeType="INSIDE" width="24.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutX="576.0" layoutY="195.0" stroke="#d0dcdd" strokeType="INSIDE" width="24.0" />
+      <Label layoutX="426.0" layoutY="19.0" text="P2" />
+      <Label layoutX="4.0" layoutY="184.0" text="P3" />
+      <Label layoutX="580.0" layoutY="215.0" text="P4" />
+      <Button layoutX="248.0" layoutY="15.0" mnemonicParsing="false" onAction="#clearTscore" text="Clear Total Score" />
     </children>
 </Pane>

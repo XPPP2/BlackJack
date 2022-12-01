@@ -65,5 +65,10 @@ public class ChooseMode extends Application {
         stage.close();
         g.start(stage);
     }
+
+    @FXML
+    public void back(){
+        stage.close();
+    }
 }
 
