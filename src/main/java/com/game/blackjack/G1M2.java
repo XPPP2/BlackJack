@@ -1,7 +1,9 @@
 package com.game.blackjack;
 
+import com.game.blackjack.controllers.G1M2Controller;
 import com.game.blackjack.fixedObjects.Medias;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -33,6 +35,8 @@ public class G1M2{
     public void goG1M2() throws Exception{
         setStage(new Stage());
         FXMLLoader fx = new FXMLLoader(getClass().getResource("G1M2.fxml"));
+        G1M2Controller g1m2c = new G1M2Controller();
+        g1m2c.setTscore();
 
         try(Scanner finp = new Scanner(new File("G1M2score.txt"))){
             if(finp.hasNextInt()){

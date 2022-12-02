@@ -3,6 +3,7 @@ package com.game.blackjack;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,11 +13,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public class Game2 extends Application {
+public class Game2 extends Application implements Initializable {
     public static Stage stage; //用来让改变场景的method可以用到
     @FXML
     private static boolean gamekeep = false; //是否结束游戏
@@ -218,7 +221,7 @@ public class Game2 extends Application {
         }
     }
     public void ifchangeA(ArrayList<Integer> arr,int p){
-        if(finalSumArr(arr)>21){
+        if(ifExplode(arr,p)){
             changeA(arr,p);
         }
     }
@@ -383,4 +386,8 @@ public class Game2 extends Application {
         return sum;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        restart();
+    }
 }

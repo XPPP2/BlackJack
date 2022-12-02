@@ -3,35 +3,41 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="317.0" prefWidth="322.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.game.blackjack.ChooseMode">
-    <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="44.0" prefWidth="225.0" text=" Choose Game Mode " textAlignment="CENTER">
-            <VBox.margin>
-                <Insets bottom="15.0" />
-            </VBox.margin>
-            <font>
-                <Font size="21.0" />
-            </font>
-            <graphic>
-                <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffe6f8" height="56.0" stroke="#ff828a" strokeType="INSIDE" width="220.0" />
-            </graphic>
-        </Label>
-        <Button mnemonicParsing="false" onAction="#goG1" prefHeight="33.0" prefWidth="110.0" text="Mode 1 (Easy)" />
-        <Button mnemonicParsing="false" onAction="#goG2" prefHeight="34.0" prefWidth="124.0" text="Mode 2 (Midium)" />
-        <Button mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="57.0" text="Back">
-            <VBox.margin>
-                <Insets />
-            </VBox.margin>
-        </Button>
-    </children>
-    <opaqueInsets>
-        <Insets />
-    </opaqueInsets>
-    <padding>
-        <Insets top="20.0" />
-    </padding>
-</VBox>
+<Pane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.game.blackjack.ChooseMode">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#568a70" height="317.0" stroke="#196143" strokeType="INSIDE" width="322.0" />
+      <VBox alignment="CENTER" prefHeight="317.0" prefWidth="322.0" spacing="15.0">
+          <children>
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="44.0" prefWidth="225.0" text=" Choose Game Mode " textAlignment="CENTER">
+                  <VBox.margin>
+                      <Insets bottom="15.0" />
+                  </VBox.margin>
+                  <font>
+                      <Font size="21.0" />
+                  </font>
+                  <graphic>
+                      <Rectangle arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffe6f8" height="56.0" stroke="#ff828a" strokeType="INSIDE" width="220.0" />
+                  </graphic>
+              </Label>
+              <Button mnemonicParsing="false" onAction="#goG1" prefHeight="33.0" prefWidth="79.0" text="Mode 1" />
+              <Button mnemonicParsing="false" onAction="#goG2" prefHeight="34.0" prefWidth="81.0" text="Mode 2" />
+              <Button mnemonicParsing="false" onAction="#back" prefHeight="31.0" prefWidth="57.0" text="Quit">
+                  <VBox.margin>
+                      <Insets />
+                  </VBox.margin>
+              </Button>
+          </children>
+          <opaqueInsets>
+              <Insets />
+          </opaqueInsets>
+          <padding>
+              <Insets top="20.0" />
+          </padding>
+      </VBox>
+   </children>
+</Pane>

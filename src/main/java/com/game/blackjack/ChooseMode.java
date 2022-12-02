@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class ChooseMode extends Application {
+public class ChooseMode extends Application{
     //图片们
     private final Image la = new Image(getClass().getResourceAsStream("/image/la.png"));
     private final Image l2 = new Image(getClass().getResourceAsStream("/image/l2.png"));

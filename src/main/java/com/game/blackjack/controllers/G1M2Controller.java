@@ -2,9 +2,10 @@ package com.game.blackjack.controllers;
 
 import com.game.blackjack.ChooseMode;
 import com.game.blackjack.G1M2;
-import com.game.blackjack.fixedObjects.Medias;
 import com.game.blackjack.Game;
+import com.game.blackjack.fixedObjects.Medias;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,11 +14,13 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public class G1M2Controller extends MainControl{
+public class G1M2Controller extends MainControl implements Initializable {
     @FXML
     private static boolean keepturn = true; //是否stand，感觉没啥用，总之先用着
     @FXML
@@ -218,18 +221,23 @@ public class G1M2Controller extends MainControl{
         // 测试是否已经结束
         if(gamekeep) {
             //玩家卡
-            //防止重复
-            int rnum1 = getNoRep(checkRepeat);
-            int num = getNum(rnum1); //得到点数
-            player.add(num);
-            checkRepeat.add(rnum1);
-            playerCard += 1;
-            score.setText("P2's score: ?"+"\nP3's score: ?"+"\nP4's score: ?"
-                    + "\nYour score:" + sumArr(player)); //更新分数标签
-            whichCard(playerCard, 1, rnum1); //更新卡片
+            if(playerCard<7) {
+                //防止重复
+                int rnum1 = getNoRep(checkRepeat);
+                int num = getNum(rnum1); //得到点数
+                player.add(num);
+                checkRepeat.add(rnum1);
+                playerCard += 1;
+                score.setText("P2's score: ?" + "\nP3's score: ?" + "\nP4's score: ?"
+                        + "\nYour score:" + sumArr(player)); //更新分数标签
+                whichCard(playerCard, 1, rnum1); //更新卡片
+                ifchangeA(player, 1);
+            }else{
+                warnLabel.setText("Reach Card Max!");
+            }
 
             //敌人卡
-            if (sumArr(player2) < testvalue) {
+            if (sumArr(player2) < testvalue & player2Card<7) {
                 int rnum2 = getNoRep(checkRepeat);
                 int num2 = getNum(rnum2);
                 player2.add(num2);
@@ -237,8 +245,9 @@ public class G1M2Controller extends MainControl{
                 flipp2.add(rnum2);
                 player2Card += 1;
                 whichCard(player2Card, 2, 0); //更新卡片（背面）
+                ifchangeA(player2,2);
             }
-            if (sumArr(player3) < testvalue2) {
+            if (sumArr(player3) < testvalue2 & player3Card<7) {
                 int rnum3 = getNoRep(checkRepeat);
                 int num3 = getNum(rnum3);
                 player3.add(num3);
@@ -246,8 +255,9 @@ public class G1M2Controller extends MainControl{
                 flipp3.add(rnum3);
                 player3Card += 1;
                 whichCard(player3Card, 3, 0); //更新卡片（背面）
+                ifchangeA(player3,3);
             }
-            if (sumArr(player4) < testvalue3) {
+            if (sumArr(player4) < testvalue3 & player4Card<7) {
                 int rnum4 = getNoRep(checkRepeat);
                 int num4 = getNum(rnum4);
                 player4.add(num4);
@@ -255,6 +265,7 @@ public class G1M2Controller extends MainControl{
                 flipp4.add(rnum4);
                 player4Card += 1;
                 whichCard(player4Card, 4, 0); //更新卡片（背面）
+                ifchangeA(player4,4);
             }
 
             //是否有人超过21点
@@ -311,7 +322,7 @@ public class G1M2Controller extends MainControl{
             keepturn = false;
             Random r = new Random();
             //敌人继续抽卡
-            while (sumArr(player2) < testvalue) {
+            while (sumArr(player2) < testvalue & player2Card<7) {
                 int rnum2 = getNoRep(checkRepeat);
                 int num2 = getNum(rnum2);
                 player2.add(num2);
@@ -319,8 +330,9 @@ public class G1M2Controller extends MainControl{
                 flipp2.add(rnum2);
                 player2Card += 1;
                 whichCard(player2Card, 2, 0); //更新卡片（背面）
+                ifchangeA(player2,2);
             }
-            while (sumArr(player3) < testvalue2) {
+            while (sumArr(player3) < testvalue2 & player3Card<7) {
                 int rnum3 = getNoRep(checkRepeat);
                 int num3 = getNum(rnum3);
                 player3.add(num3);
@@ -328,8 +340,9 @@ public class G1M2Controller extends MainControl{
                 flipp3.add(rnum3);
                 player3Card += 1;
                 whichCard(player3Card, 3, 0); //更新卡片（背面）
+                ifchangeA(player3,3);
             }
-            while (sumArr(player4) < testvalue3) {
+            while (sumArr(player4) < testvalue3 & player4Card<7) {
                 int rnum4 = getNoRep(checkRepeat);
                 int num4 = getNum(rnum4);
                 player4.add(num4);
@@ -337,6 +350,7 @@ public class G1M2Controller extends MainControl{
                 flipp4.add(rnum4);
                 player4Card += 1;
                 whichCard(player4Card, 4, 0); //更新卡片（背面）
+                ifchangeA(player4,4);
             }
 
             //结算输赢
@@ -502,5 +516,39 @@ public class G1M2Controller extends MainControl{
         for(int q=2;q<5;q++){
             flipcards(q);
         }
+    }
+
+    //检测是否爆炸，爆炸则检查是否有A，有的话替换后输出T/F
+    public boolean ifExplode(ArrayList<Integer> arr){
+        if(sumArr(arr)>21){
+            return true;
+        }
+        return false;
+    }
+    //把作为11的A换成1（默认这之前已经检查过是否爆炸）
+    public void changeA(ArrayList<Integer> arr,int p){
+        if(arr.contains(11)){
+            int index = arr.indexOf(11);
+            if(p==1){
+                player.set(index,1);
+            }else if(p==2){
+                player2.set(index,1);
+            }else if(p==3){
+                player3.set(index,1);
+            }else{
+                player4.set(index,1);
+            }
+        }
+    }
+    public void ifchangeA(ArrayList<Integer> arr,int p){
+        if(ifExplode(arr)){
+            changeA(arr,p);
+        }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        restart();
+        setTscore();
     }
 }

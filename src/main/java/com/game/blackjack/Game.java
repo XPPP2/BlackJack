@@ -4,6 +4,7 @@ import com.game.blackjack.controllers.G1M2Controller;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -13,11 +14,13 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.ResourceBundle;
 
-public class Game extends Application {
+public class Game extends Application implements Initializable {
     public static Stage stage; //用来让改变场景的method可以用到
     @FXML
     private static boolean keepturn = true; //是否stand，感觉没啥用，总之先用着
@@ -226,28 +229,36 @@ public class Game extends Application {
         if(gamekeep) {
             //玩家卡
             if (keepturn) {
-                //防止重复
-                int rnum1 = getNoRep(checkRepeat);
-                int num = getNum(rnum1); //得到点数
-                player.add(num);
-                checkRepeat.add(rnum1);
-                playerCard += 1;
-                score.setText("P2's score: ?"
-                        + "\nYour score:" + sumArr(player)); //更新分数标签
-                whichCard(playerCard, 1, rnum1); //更新卡片
+                if(playerCard <7) {
+                    //防止重复
+                    int rnum1 = getNoRep(checkRepeat);
+                    int num = getNum(rnum1); //得到点数
+                    player.add(num);
+                    checkRepeat.add(rnum1);
+                    playerCard += 1;
+                    score.setText("P2's score: ?"
+                            + "\nYour score:" + sumArr(player)); //更新分数标签
+                    whichCard(playerCard, 1, rnum1); //更新卡片
+                    ifchangeA(player,1);
+                }else{
+                    warnLabel.setText("Reach Card Max!");
+                }
             } else {
                 warnLabel.setText("Already Stand."); //虽然实际测试好像用不到但是总之先加上吧
             }
 
-            //敌人卡
-            if (sumArr(player2) < testvalue) {
-                int rnum2 = getNoRep(checkRepeat);
-                int num2 = getNum(rnum2);
-                player2.add(num2);
-                checkRepeat.add(rnum2);
-                flipp2.add(rnum2);
-                player2Card += 1;
-                whichCard(player2Card, 2, 0); //更新卡片（背面）
+            if(player2Card<7) {
+                //敌人卡
+                if (sumArr(player2) < testvalue) {
+                    int rnum2 = getNoRep(checkRepeat);
+                    int num2 = getNum(rnum2);
+                    player2.add(num2);
+                    checkRepeat.add(rnum2);
+                    flipp2.add(rnum2);
+                    player2Card += 1;
+                    whichCard(player2Card, 2, 0); //更新卡片（背面）
+                    ifchangeA(player2,2);
+                }
             }
 
             //是否有人超过21点
@@ -277,7 +288,7 @@ public class Game extends Application {
             keepturn = false;
             Random r = new Random();
             //敌人继续抽卡
-            while (sumArr(player2) < testvalue) {
+            while (sumArr(player2) < testvalue & player2Card<7) {
                 int rnum2 = getNoRep(checkRepeat);
                 int num2 = getNum(rnum2);
                 player2.add(num2);
@@ -285,6 +296,7 @@ public class Game extends Application {
                 flipp2.add(rnum2);
                 player2Card += 1;
                 whichCard(player2Card, 2, 0); //更新卡片（背面）
+                ifchangeA(player2,2);
             }
 
             //结算输赢
@@ -367,6 +379,30 @@ public class Game extends Application {
         p2c1.setImage(cardset.get(rnum2));
     }
 
+    //检测是否爆炸，爆炸则检查是否有A，有的话替换后输出T/F
+    public boolean ifExplode(ArrayList<Integer> arr){
+        if(sumArr(arr)>21){
+            return true;
+        }
+        return false;
+    }
+    //把作为11的A换成1（默认这之前已经检查过是否爆炸）
+    public void changeA(ArrayList<Integer> arr,int p){
+        if(arr.contains(11)){
+            int index = arr.indexOf(11);
+            if(p==1){
+                player.set(index,1);
+            }else{
+                player2.set(index,1);
+            }
+        }
+    }
+    public void ifchangeA(ArrayList<Integer> arr,int p){
+        if(ifExplode(arr)){
+            changeA(arr,p);
+        }
+    }
+
     public static int sumArr(ArrayList<Integer> arr) {
         int sum=0;
         for (int x : arr) {
@@ -375,6 +411,10 @@ public class Game extends Application {
         return sum;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        restart();
+    }
 }
 
 
