@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eef9b49c-4047-40db-89e1-a0ac48603047" name="Changes" comment="enrich mode3">
+    <list default="true" id="eef9b49c-4047-40db-89e1-a0ac48603047" name="Changes" comment="initialize 其他mode,change A when explode">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/G1M2score.txt" beforeDir="false" afterPath="$PROJECT_DIR$/G1M2score.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/ChooseMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/ChooseMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/G1M2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/G1M2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/Game2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/Game2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/controllers/G1M2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/controllers/G1M2Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/game/blackjack/Choose.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/game/blackjack/Choose.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/controllers/MainControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/controllers/MainControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/game/blackjack/G1M2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/game/blackjack/G1M2.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +123,7 @@
       <workItem from="1669838120802" duration="246000" />
       <workItem from="1669867722965" duration="2182000" />
       <workItem from="1669928366868" duration="10746000" />
-      <workItem from="1669942983149" duration="1440000" />
+      <workItem from="1669942983149" duration="3102000" />
     </task>
     <task id="LOCAL-00001" summary="all set except first turn">
       <created>1669237073284</created>
@@ -199,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669936597055</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="initialize 其他mode,change A when explode">
+      <created>1669944504319</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669944504319</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +227,8 @@
     <MESSAGE value="记分模式" />
     <MESSAGE value="readme" />
     <MESSAGE value="enrich mode3" />
-    <option name="LAST_COMMIT_MESSAGE" value="enrich mode3" />
+    <MESSAGE value="initialize 其他mode,change A when explode" />
+    <option name="LAST_COMMIT_MESSAGE" value="initialize 其他mode,change A when explode" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

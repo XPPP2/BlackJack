@@ -30,12 +30,17 @@ public abstract class MainControl {
     }
     //得到点数
     public static int getNum(int nums){
-        //点数（大于10则算作10）
+        //点数（大于10则算作10,A算作11）
         int num=(nums-1)%13+1;
+        int ans;
         if(num>10){
-            num=10;
+            ans = 10;
+        }else if(num==1){
+            ans = 11;
+        }else{
+            ans = num;
         }
-        return num;
+        return ans;
     }
     //玩家点数总和
     public static int sumArr(ArrayList<Integer> arr) {
