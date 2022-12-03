@@ -228,10 +228,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 player.add(num);
                 checkRepeat.add(rnum1);
                 playerCard += 1;
-                score.setText("P2's score: ?" + "\nP3's score: ?" + "\nP4's score: ?"
-                        + "\nYour score:" + sumArr(player)); //更新分数标签
                 whichCard(playerCard, 1, rnum1); //更新卡片
                 ifchangeA(player, 1);
+                score.setText("P2's score: ?" + "\nP3's score: ?" + "\nP4's score: ?"
+                        + "\nYour score:" + sumArr(player)); //更新分数标签,应该放在最后
             }else{
                 warnLabel.setText("Reach Card Max!");
             }

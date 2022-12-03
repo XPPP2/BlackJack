@@ -241,8 +241,6 @@ public class Game extends Application implements Initializable {
                     player.add(num);
                     checkRepeat.add(rnum1);
                     playerCard += 1;
-                    score.setText("P2's score: ?"
-                            + "\nYour score:" + sumArr(player)); //更新分数标签
                     whichCard(playerCard, 1, rnum1); //更新卡片
                     ifchangeA(player,1);
                 }else{
@@ -280,6 +278,8 @@ public class Game extends Application implements Initializable {
                 setScore();
                 gamekeep = false;
             }
+            score.setText("P2's score: ?"
+                    + "\nYour score:" + sumArr(player)); //更新分数标签
         }else{
             warnLabel.setText("Please Start New Turn");
         }
