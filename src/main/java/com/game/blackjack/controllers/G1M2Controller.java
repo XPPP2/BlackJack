@@ -38,6 +38,12 @@ public class G1M2Controller extends MainControl implements Initializable {
     private Label score = new Label(); //显示分数
     @FXML
     private Label tScore = new Label(); //玩家总分
+    @FXML
+    private Label tScore2 = new Label();//p2总分
+    @FXML
+    private Label tScore3 = new Label();
+    @FXML
+    private Label tScore4 = new Label();
     private static ArrayList<Integer> player = new ArrayList<Integer>(); //玩家卡片数值
     private static ArrayList<Integer> player2 = new ArrayList<Integer>(); //对手卡片数值
     private static ArrayList<Integer> player3 = new ArrayList<Integer>(); //p3卡片数值
@@ -212,6 +218,9 @@ public class G1M2Controller extends MainControl implements Initializable {
     @FXML
     public void setTscore(){
         tScore.setText("Your Total Score: "+G1M2.getTscore());
+        tScore2.setText(""+G1M2.getTscoreP2());
+        tScore3.setText(""+G1M2.getTscoreP3());
+        tScore4.setText(""+G1M2.getTscoreP4());
     }
 
     @FXML
@@ -276,7 +285,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 setScore();
                 gamekeep = false;
                 //扣分
-                G1M2.setTscore(G1M2.getTscore()-6);
+                ifnotExplode();
+                ifget21(2);ifget21(3);ifget21(4);
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player2)>21) {
@@ -286,10 +296,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 setScore();
                 gamekeep = false;
                 //加分
-                G1M2.setTscore(G1M2.getTscore()+3);
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+10);
-                }
+                ifnotExplode();
+                ifget21(1);ifget21(3);ifget21(4);
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player3)>21) {
@@ -298,10 +306,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 gamekeep = false;
-                G1M2.setTscore(G1M2.getTscore()+3);
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+10);
-                }
+                ifnotExplode();
+                ifget21(1);ifget21(2);ifget21(4);
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player4)>21) {
@@ -310,10 +316,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 gamekeep = false;
-                G1M2.setTscore(G1M2.getTscore()+3);
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+10);
-                }
+                ifnotExplode();
+                ifget21(1);ifget21(2);ifget21(3);
                 setTscore();//显示
                 changeTscore();
             }
@@ -368,10 +372,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 warnLabel.setText("P2 Explode, You Win!");
                 flipcard();
                 setScore();
-                G1M2.setTscore(G1M2.getTscore()+3);//加分
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+10);
-                }
+                ifnotExplode();//加分
+                ifget21(1);ifget21(3);ifget21(4);
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player3)>21) {
@@ -380,11 +382,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 gamekeep = false;
-                //扣分
-                G1M2.setTscore(G1M2.getTscore()+3);
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+10);
-                }
+                ifnotExplode();//爆炸全扣分
+                ifget21(1);ifget21(2);ifget21(4);
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player4)>21) {
@@ -393,42 +392,40 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 gamekeep = false;
-                //扣分
-                G1M2.setTscore(G1M2.getTscore()+3);
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+10);
-                }
+                ifnotExplode();
+                ifget21(1);ifget21(2);ifget21(3);
                 setTscore();//显示
                 changeTscore();
             }else if (sumArr(player)==Math.max(sumArr(player4),Math.max(sumArr(player3),Math.max(sumArr(player),sumArr(player2))))) {
                 warnLabel.setText("You Win!");
                 flipcard();
                 setScore();
-                G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
-                if(sumArr(player)==21){
-                    G1M2.setTscore(G1M2.getTscore()+5);
-                }
+                sumScore();
+                ifget21(1);ifget21(2);ifget21(3);ifget21(4);
                 setTscore();//显示新分数
                 changeTscore();
             }else if(sumArr(player2)==Math.max(sumArr(player4),Math.max(sumArr(player3),Math.max(sumArr(player),sumArr(player2))))) {
                 warnLabel.setText("You Lose! P2 Win.");
                 flipcard();
                 setScore();
-                G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
+                sumScore();
+                ifget21(1);ifget21(2);ifget21(3);ifget21(4);
                 setTscore();//显示新分数
                 changeTscore();
             }else if(sumArr(player3)==Math.max(sumArr(player4),Math.max(sumArr(player3),Math.max(sumArr(player),sumArr(player2))))) {
                 warnLabel.setText("You Lose! P3 Win.");
                 flipcard();
                 setScore();
-                G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
+                sumScore();
+                ifget21(1);ifget21(2);ifget21(3);ifget21(4);
                 setTscore();//显示新分数
                 changeTscore();
             }else if(sumArr(player4)==Math.max(sumArr(player4),Math.max(sumArr(player3),Math.max(sumArr(player),sumArr(player2))))) {
                 warnLabel.setText("You Lose! P4 Win.");
                 flipcard();
                 setScore();
-                G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
+                sumScore();
+                ifget21(1);ifget21(2);ifget21(3);ifget21(4);
                 setTscore();//显示新分数
                 changeTscore();
             }
@@ -436,6 +433,14 @@ public class G1M2Controller extends MainControl implements Initializable {
         }else{
             warnLabel.setText("Please Start New Turn");
         }
+    }
+
+    //分别计算总分
+    public void sumScore(){
+        G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
+        G1M2.setTscoreP2(G1M2.getTscoreP2()+3*sumArr(player2)-sumArr(player)-sumArr(player3)-sumArr(player4));
+        G1M2.setTscoreP3(G1M2.getTscoreP3()+3*sumArr(player3)-sumArr(player2)-sumArr(player)-sumArr(player4));
+        G1M2.setTscoreP4(G1M2.getTscoreP4()+3*sumArr(player4)-sumArr(player2)-sumArr(player3)-sumArr(player));
     }
 
     @FXML
@@ -503,14 +508,62 @@ public class G1M2Controller extends MainControl implements Initializable {
     public void clearTscore() throws FileNotFoundException {
         PrintWriter fout = new PrintWriter(new File("G1M2score.txt"));
         G1M2.setTscore(0);
-        fout.print(0);
+        fout.println(0);
+        G1M2.setTscoreP2(0);
+        fout.println(0);
+        G1M2.setTscoreP3(0);
+        fout.println(0);
+        G1M2.setTscoreP4(0);
+        fout.println(0);
         setTscore();
         fout.close();
     }
     public void changeTscore() throws FileNotFoundException {
         PrintWriter fout = new PrintWriter(new File("G1M2score.txt"));
-        fout.print(G1M2.getTscore());
+        fout.println(G1M2.getTscore());
+        fout.println(G1M2.getTscoreP2());
+        fout.println(G1M2.getTscoreP3());
+        fout.println(G1M2.getTscoreP4());
         fout.close();
+    }
+
+    public void ifget21(int players){
+        if(players==1){
+            if(sumArr(player)==21){
+                G1M2.setTscore(G1M2.getTscore()+10);
+                ifnot21();
+            }
+        }else if(players==2){
+            if(sumArr(player2)==21){
+                G1M2.setTscoreP2(G1M2.getTscoreP2()+10);
+                ifnot21();
+            }
+        }else if(players==3){
+            if(sumArr(player3)==21){
+                G1M2.setTscoreP3(G1M2.getTscoreP3()+10);
+                ifnot21();
+            }
+        }else{
+            if(sumArr(player4)==21){
+                G1M2.setTscoreP4(G1M2.getTscoreP4()+10);
+                ifnot21();
+            }
+        }
+    }
+
+    public void ifnot21(){
+            if(sumArr(player)!=21) {
+                G1M2.setTscore(G1M2.getTscore() - 4);
+            }
+            if(sumArr(player2)!=21){
+                G1M2.setTscoreP2(G1M2.getTscoreP2() - 4);
+            }
+            if(sumArr(player3)!=21){
+                G1M2.setTscoreP3(G1M2.getTscoreP3() - 4);
+            }
+            if(sumArr(player4)!=21) {
+                G1M2.setTscoreP4(G1M2.getTscoreP4() - 4);
+            }
     }
 
     public void flipcards(int players) {
@@ -536,6 +589,29 @@ public class G1M2Controller extends MainControl implements Initializable {
     public void flipcard() {
         for(int q=2;q<5;q++){
             flipcards(q);
+        }
+    }
+
+    public void ifnotExplode(){
+        if(!ifExplode(player)){
+            G1M2.setTscore(G1M2.getTscore()+3);
+        }else{
+            G1M2.setTscore(G1M2.getTscore()-6);
+        }
+        if(!ifExplode(player2)){
+            G1M2.setTscoreP2(G1M2.getTscoreP2()+3);
+        }else{
+            G1M2.setTscoreP2(G1M2.getTscoreP2()-6);
+        }
+        if(!ifExplode(player3)){
+            G1M2.setTscoreP3(G1M2.getTscoreP3()+3);
+        }else{
+            G1M2.setTscoreP3(G1M2.getTscoreP3()-6);
+        }
+        if(!ifExplode(player4)){
+            G1M2.setTscoreP4(G1M2.getTscoreP4()+3);
+        }else{
+            G1M2.setTscoreP4(G1M2.getTscoreP4()-6);
         }
     }
 

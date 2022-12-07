@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eef9b49c-4047-40db-89e1-a0ac48603047" name="Changes" comment="fix bug">
+    <list default="true" id="eef9b49c-4047-40db-89e1-a0ac48603047" name="Changes" comment="拿到21点加分">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/G1M2score.txt" beforeDir="false" afterPath="$PROJECT_DIR$/G1M2score.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/G1M2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/G1M2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/game/blackjack/controllers/G1M2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/game/blackjack/controllers/G1M2Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/game/blackjack/G1M2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/game/blackjack/G1M2.fxml" afterDir="false" />
     </list>
@@ -22,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaFXApplication" />
-        <option value="FxmlFile" />
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -124,7 +125,7 @@
       <workItem from="1669928366868" duration="10746000" />
       <workItem from="1669942983149" duration="6977000" />
       <workItem from="1670205559261" duration="1280000" />
-      <workItem from="1670378959012" duration="1588000" />
+      <workItem from="1670378959012" duration="7397000" />
     </task>
     <task id="LOCAL-00001" summary="all set except first turn">
       <created>1669237073284</created>
@@ -217,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670098644162</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="拿到21点加分">
+      <created>1670381347174</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1670381347174</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,7 +253,8 @@
     <MESSAGE value="initialize 其他mode,change A when explode" />
     <MESSAGE value="change A when explode" />
     <MESSAGE value="fix bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix bug" />
+    <MESSAGE value="拿到21点加分" />
+    <option name="LAST_COMMIT_MESSAGE" value="拿到21点加分" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
