@@ -286,7 +286,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 setScore();
                 gamekeep = false;
                 //加分
-                G1M2.setTscore(G1M2.getTscore()+2);
+                G1M2.setTscore(G1M2.getTscore()+3);
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+10);
+                }
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player3)>21) {
@@ -295,7 +298,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 gamekeep = false;
-                G1M2.setTscore(G1M2.getTscore()+2);
+                G1M2.setTscore(G1M2.getTscore()+3);
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+10);
+                }
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player4)>21) {
@@ -304,7 +310,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 gamekeep = false;
-                G1M2.setTscore(G1M2.getTscore()+2);
+                G1M2.setTscore(G1M2.getTscore()+3);
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+10);
+                }
                 setTscore();//显示
                 changeTscore();
             }
@@ -359,7 +368,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 warnLabel.setText("P2 Explode, You Win!");
                 flipcard();
                 setScore();
-                G1M2.setTscore(G1M2.getTscore()+2);//加分
+                G1M2.setTscore(G1M2.getTscore()+3);//加分
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+10);
+                }
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player3)>21) {
@@ -369,7 +381,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 setScore();
                 gamekeep = false;
                 //扣分
-                G1M2.setTscore(G1M2.getTscore()+2);
+                G1M2.setTscore(G1M2.getTscore()+3);
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+10);
+                }
                 setTscore();//显示
                 changeTscore();
             }else if(sumArr(player4)>21) {
@@ -379,7 +394,10 @@ public class G1M2Controller extends MainControl implements Initializable {
                 setScore();
                 gamekeep = false;
                 //扣分
-                G1M2.setTscore(G1M2.getTscore()+2);
+                G1M2.setTscore(G1M2.getTscore()+3);
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+10);
+                }
                 setTscore();//显示
                 changeTscore();
             }else if (sumArr(player)==Math.max(sumArr(player4),Math.max(sumArr(player3),Math.max(sumArr(player),sumArr(player2))))) {
@@ -387,6 +405,9 @@ public class G1M2Controller extends MainControl implements Initializable {
                 flipcard();
                 setScore();
                 G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
+                if(sumArr(player)==21){
+                    G1M2.setTscore(G1M2.getTscore()+5);
+                }
                 setTscore();//显示新分数
                 changeTscore();
             }else if(sumArr(player2)==Math.max(sumArr(player4),Math.max(sumArr(player3),Math.max(sumArr(player),sumArr(player2))))) {
