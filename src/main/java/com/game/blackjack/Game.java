@@ -121,7 +121,7 @@ public class Game extends Application implements Initializable {
         mp.play();
 
         Scene sc = new Scene(fx.load());
-        primaryStage.setTitle("Black Jack");
+        primaryStage.setTitle("Blackjack Practice 1");
         primaryStage.setScene(sc);
         primaryStage.show();
 

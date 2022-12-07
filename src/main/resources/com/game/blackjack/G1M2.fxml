@@ -38,7 +38,7 @@
         <ImageView fx:id="p2c4" fitHeight="99.0" fitWidth="70.0" layoutX="255.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="p2c5" fitHeight="98.0" fitWidth="67.0" layoutX="272.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fx:id="p2c6" fitHeight="99.0" fitWidth="70.0" layoutX="288.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutX="393.0" layoutY="32.0" stroke="#d0dcdd" strokeType="INSIDE" width="32.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutX="386.0" layoutY="49.0" stroke="#d0dcdd" strokeType="INSIDE" width="32.0" />
         <Button layoutX="20.0" layoutY="353.0" mnemonicParsing="false" onAction="#goG2" text="Change Mode" />
         <Button layoutX="20.0" layoutY="312.0" mnemonicParsing="false" onAction="#clickHelp" prefHeight="26.0" prefWidth="52.0" text="Help" />
         <ImageView fx:id="help1" disable="true" fitHeight="261.0" fitWidth="377.0" layoutX="116.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" />
@@ -65,12 +65,15 @@
       <ImageView fx:id="p4c6" fitHeight="99.0" fitWidth="70.0" layoutX="493.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutY="165.0" stroke="#d0dcdd" strokeType="INSIDE" width="32.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6fff9" height="54.0" layoutX="568.0" layoutY="195.0" stroke="#d0dcdd" strokeType="INSIDE" width="32.0" />
-      <Label layoutX="402.0" layoutY="40.0" text="P2" />
+      <Label layoutX="395.0" layoutY="55.0" text="P2" />
       <Label layoutX="9.0" layoutY="175.0" text="P3" />
       <Label layoutX="576.0" layoutY="204.0" text="P4" />
-      <Button layoutX="308.0" layoutY="367.0" mnemonicParsing="false" onAction="#clearTscore" text="Clear Total Score" />
-      <Label fx:id="tScore3" layoutX="5.0" layoutY="192.0" prefHeight="17.0" prefWidth="24.0" />
-      <Label fx:id="tScore4" layoutX="572.0" layoutY="225.0" prefHeight="17.0" prefWidth="24.0" />
-      <Label fx:id="tScore2" layoutX="397.0" layoutY="59.0" prefHeight="17.0" prefWidth="24.0" />
+      <Button layoutX="308.0" layoutY="367.0" mnemonicParsing="false" onAction="#clearTscore" text="Clear Score" />
+      <Label fx:id="tScore3" layoutX="1.0" layoutY="192.0" prefHeight="17.0" prefWidth="32.0" />
+      <Label fx:id="tScore4" layoutX="569.0" layoutY="224.0" prefHeight="17.0" prefWidth="32.0" />
+      <Label fx:id="tScore2" layoutX="387.0" layoutY="76.0" prefHeight="17.0" prefWidth="32.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c0fff5" height="26.0" layoutX="379.0" layoutY="8.0" stroke="#8bbfd0" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="107.0" />
+      <Label fx:id="turnNum" layoutX="386.0" layoutY="13.0" prefHeight="17.0" prefWidth="94.0" />
+      <Button layoutX="413.0" layoutY="368.0" mnemonicParsing="false" onAction="#displayScore" text="Record" />
     </children>
 </Pane>

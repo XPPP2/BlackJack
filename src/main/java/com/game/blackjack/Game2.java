@@ -1,5 +1,6 @@
 package com.game.blackjack;
 
+import com.game.blackjack.controllers.G2M2Controller;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -128,17 +129,27 @@ public class Game2 extends Application implements Initializable {
 
         Scene sc2 = new Scene(fx2.load());
 
-        primaryStage.setTitle("Black Jack Mode 2");
+        primaryStage.setTitle("Blackjack Practice 2");
         primaryStage.setScene(sc2);
         primaryStage.show();
     }
 
     //改变场景
     @FXML
-    public void goG1() throws Exception{
-        Game g = new Game();
+    public void goG2() throws Exception{
+        mp.stop();
+        G2M2 g = new G2M2();
         stage.close();
-        g.start(stage); //不然stage会是null，虽然好像也可以用initializable但是我偷工减料了（
+        //图片hashmap，点数对应图片
+        G2M2Controller.cardset.put(0,back);
+        G2M2Controller.cardset.put(1,la); G2M2Controller.cardset.put(2,l2); G2M2Controller.cardset.put(3,l3); G2M2Controller.cardset.put(4,l4);
+        G2M2Controller.cardset.put(5,l5); G2M2Controller.cardset.put(6,l6); G2M2Controller.cardset.put(7,l7); G2M2Controller.cardset.put(8,l8);
+        G2M2Controller.cardset.put(9,l9); G2M2Controller.cardset.put(10,l10); G2M2Controller.cardset.put(11,lj); G2M2Controller.cardset.put(12,lq);
+        G2M2Controller.cardset.put(13,lk); G2M2Controller.cardset.put(14,pa); G2M2Controller.cardset.put(15,p2); G2M2Controller.cardset.put(16,p3);
+        G2M2Controller.cardset.put(17,p4); G2M2Controller.cardset.put(18,p5); G2M2Controller.cardset.put(19,p6); G2M2Controller.cardset.put(20,p7);
+        G2M2Controller.cardset.put(21,p8); G2M2Controller.cardset.put(22,p9); G2M2Controller.cardset.put(23,p10); G2M2Controller.cardset.put(24,pj);
+        G2M2Controller.cardset.put(25,pq); G2M2Controller.cardset.put(26,pk);
+        g.goG2M2();
     }
     @FXML
     public void goBack() throws Exception{

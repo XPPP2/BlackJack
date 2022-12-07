@@ -1,8 +1,6 @@
 package com.game.blackjack.controllers;
 
-import com.game.blackjack.ChooseMode;
-import com.game.blackjack.G1M2;
-import com.game.blackjack.Game;
+import com.game.blackjack.*;
 import com.game.blackjack.fixedObjects.Medias;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,9 +18,8 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.*;
 
-public class G1M2Controller extends MainControl implements Initializable {
-    @FXML
-    private static boolean keepturn = true; //是否stand，感觉没啥用，总之先用着
+public class G2M2Controller extends MainControl implements Initializable {
+
     @FXML
     private static boolean gamekeep = false; //是否结束游戏
     private static int playerCard = 0; //玩家目前卡片数量，用来确定卡片图片放在第几个位置
@@ -50,7 +47,7 @@ public class G1M2Controller extends MainControl implements Initializable {
     private static ArrayList<Integer> player4 = new ArrayList<Integer>(); //p4卡片数值
 
     //规则
-    private final Image rule1 = new Image(getClass().getResourceAsStream("/image/rule1.png"));
+    private final Image rule2 = new Image(getClass().getResourceAsStream("/image/rule2.png"));
 
     // 用来对应随机点数和图片
     public static HashMap<Integer,Image> cardset = new HashMap<>();
@@ -106,44 +103,29 @@ public class G1M2Controller extends MainControl implements Initializable {
     private ImageView p4c6 = new ImageView();
 
     @FXML
-    private ImageView help1 = new ImageView(); //规则
+    private ImageView help2 = new ImageView(); //规则
     private boolean helpdisplay = false; //规则页面是否显示
     //记录牌号，防止重复
     private static ArrayList<Integer> checkRepeat = new ArrayList<Integer>();
-    //记录p2牌号，结束时p2翻牌
-    private static ArrayList<Integer> flipp2 = new ArrayList<Integer>();
-    private static ArrayList<Integer> flipp3 = new ArrayList<Integer>();
-    private static ArrayList<Integer> flipp4 = new ArrayList<Integer>();
-
-    @FXML
-    private Label turnNum = new Label();//目前多少局
-
-    public void showTurnNum(){
-        turnNum.setText("Turn: "+G1M2.getTurnNumber()+"   =< 25");
-    }
-    public void addTurnNum(){
-        G1M2.setTurnNumber(G1M2.getTurnNumber()+1);
-    }
+    private static ArrayList<Integer> flipping = new ArrayList<Integer>(); //记录三个首位
 
     @FXML
     public void goG2() throws Exception{
         Stage stage = new Stage();
         Medias.mp.stop();
-        G1M2.closeStage();
-        Game g = new Game();
+        G2M2.closeStage();
+        Game2 g = new Game2();
         g.start(stage);
     }
-
     @FXML
     public void goBack() throws Exception{
         Stage stage = new Stage();
         Medias.mp.stop();
         ChooseMode g = new ChooseMode();
-        G1M2.closeStage();
+        G2M2.closeStage();
         g.start(stage);
     }
 
-    @FXML
     @Override
     public void whichCard(int index, int players, int num) {
         if(players==1){
@@ -205,18 +187,17 @@ public class G1M2Controller extends MainControl implements Initializable {
         }
     }
 
-    @FXML
     @Override
     public void clickHelp() {
         if(helpdisplay){
-            help1.setImage(null);
+            help2.setImage(null);
             helpdisplay=false;
         }else{
-            help1.setImage(rule1);
+            help2.setImage(rule2);
             helpdisplay=true;
         }
     }
-    @FXML
+
     @Override
     public void setScore() {
         score.setText("P2's score:"+sumArr(player2)
@@ -224,18 +205,22 @@ public class G1M2Controller extends MainControl implements Initializable {
                 +"\nP4's scpre: "+sumArr(player4)
                 +"\nYour score:"+sumArr(player));
     }
-
+    public void sethalfScore() {
+        score.setText("P2's score: ?+ " + (sumArr(player2) - player2.get(0))
+                +"\nP3's score: ?+ "+(sumArr(player3) - player3.get(0))
+                +"\nP4's scpre: ?+ "+(sumArr(player4) - player4.get(0))
+                +"\nYour score: " + sumArr(player));
+    }
     @FXML
     public void setTscore(){
-        tScore.setText("Your Total Score: "+G1M2.getTscore());
-        tScore2.setText(""+G1M2.getTscoreP2());
-        tScore3.setText(""+G1M2.getTscoreP3());
-        tScore4.setText(""+G1M2.getTscoreP4());
+        tScore.setText("Your Total Score: "+G2M2.getTscore());
+        tScore2.setText(""+G2M2.getTscoreP2());
+        tScore3.setText(""+G2M2.getTscoreP3());
+        tScore4.setText(""+G2M2.getTscoreP4());
     }
-
-    @FXML
+    
     @Override
-    public void hit() throws FileNotFoundException {
+    public void hit() throws Exception {
         Random r = new Random();
         // 测试是否已经结束
         if(gamekeep) {
@@ -249,8 +234,6 @@ public class G1M2Controller extends MainControl implements Initializable {
                 playerCard += 1;
                 whichCard(playerCard, 1, rnum1); //更新卡片
                 ifchangeA(player, 1);
-                score.setText("P2's score: ?" + "\nP3's score: ?" + "\nP4's score: ?"
-                        + "\nYour score:" + sumArr(player)); //更新分数标签,应该放在最后
             }else{
                 warnLabel.setText("Reach Card Max!");
             }
@@ -261,9 +244,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 int num2 = getNum(rnum2);
                 player2.add(num2);
                 checkRepeat.add(rnum2);
-                flipp2.add(rnum2);
                 player2Card += 1;
-                whichCard(player2Card, 2, 0); //更新卡片（背面）
+                whichCard(player2Card, 2, rnum2); //更新卡片（背面）
                 ifchangeA(player2,2);
             }
             if (sumArr(player3) < testvalue2 & player3Card<7) {
@@ -271,9 +253,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 int num3 = getNum(rnum3);
                 player3.add(num3);
                 checkRepeat.add(rnum3);
-                flipp3.add(rnum3);
                 player3Card += 1;
-                whichCard(player3Card, 3, 0); //更新卡片（背面）
+                whichCard(player3Card, 3, rnum3); //更新卡片（背面）
                 ifchangeA(player3,3);
             }
             if (sumArr(player4) < testvalue3 & player4Card<7) {
@@ -281,11 +262,11 @@ public class G1M2Controller extends MainControl implements Initializable {
                 int num4 = getNum(rnum4);
                 player4.add(num4);
                 checkRepeat.add(rnum4);
-                flipp4.add(rnum4);
                 player4Card += 1;
-                whichCard(player4Card, 4, 0); //更新卡片（背面）
+                whichCard(player4Card, 4, rnum4); //更新卡片（背面）
                 ifchangeA(player4,4);
             }
+            sethalfScore(); //更新分数标签,应该放在最后
 
             //是否有人超过21点
             if(sumArr(player)>21) {
@@ -299,7 +280,6 @@ public class G1M2Controller extends MainControl implements Initializable {
                 ifget21(2);ifget21(3);ifget21(4);
                 setTscore();//显示
                 changeTscore();
-                ifGameOver();
             }else if(sumArr(player2)>21) {
                 Medias.ex.play();
                 warnLabel.setText("P2 Explode, You Win!");
@@ -311,7 +291,6 @@ public class G1M2Controller extends MainControl implements Initializable {
                 ifget21(1);ifget21(3);ifget21(4);
                 setTscore();//显示
                 changeTscore();
-                ifGameOver();
             }else if(sumArr(player3)>21) {
                 Medias.ex.play();
                 warnLabel.setText("P3 Explode, You Win!");
@@ -322,7 +301,6 @@ public class G1M2Controller extends MainControl implements Initializable {
                 ifget21(1);ifget21(2);ifget21(4);
                 setTscore();//显示
                 changeTscore();
-                ifGameOver();
             }else if(sumArr(player4)>21) {
                 Medias.ex.play();
                 warnLabel.setText("P4 Explode, You Win!");
@@ -333,7 +311,6 @@ public class G1M2Controller extends MainControl implements Initializable {
                 ifget21(1);ifget21(2);ifget21(3);
                 setTscore();//显示
                 changeTscore();
-                ifGameOver();
             }
         }else{
             warnLabel.setText("Please Start New Turn");
@@ -346,7 +323,6 @@ public class G1M2Controller extends MainControl implements Initializable {
         //是否已经结束
         if(gamekeep) {
             //玩家停止抽卡
-            keepturn = false;
             Random r = new Random();
             //敌人继续抽卡
             while (sumArr(player2) < testvalue & player2Card<7) {
@@ -354,9 +330,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 int num2 = getNum(rnum2);
                 player2.add(num2);
                 checkRepeat.add(rnum2);
-                flipp2.add(rnum2);
                 player2Card += 1;
-                whichCard(player2Card, 2, 0); //更新卡片（背面）
+                whichCard(player2Card, 2, rnum2); //更新卡片（背面）
                 ifchangeA(player2,2);
             }
             while (sumArr(player3) < testvalue2 & player3Card<7) {
@@ -364,9 +339,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 int num3 = getNum(rnum3);
                 player3.add(num3);
                 checkRepeat.add(rnum3);
-                flipp3.add(rnum3);
                 player3Card += 1;
-                whichCard(player3Card, 3, 0); //更新卡片（背面）
+                whichCard(player3Card, 3, rnum3); //更新卡片（背面）
                 ifchangeA(player3,3);
             }
             while (sumArr(player4) < testvalue3 & player4Card<7) {
@@ -374,9 +348,8 @@ public class G1M2Controller extends MainControl implements Initializable {
                 int num4 = getNum(rnum4);
                 player4.add(num4);
                 checkRepeat.add(rnum4);
-                flipp4.add(rnum4);
                 player4Card += 1;
-                whichCard(player4Card, 4, 0); //更新卡片（背面）
+                whichCard(player4Card, 4, rnum4); //更新卡片（背面）
                 ifchangeA(player4,4);
             }
 
@@ -444,7 +417,6 @@ public class G1M2Controller extends MainControl implements Initializable {
                 changeTscore();
             }
             gamekeep = false;
-            ifGameOver();
         }else{
             warnLabel.setText("Please Start New Turn");
         }
@@ -452,10 +424,10 @@ public class G1M2Controller extends MainControl implements Initializable {
 
     //分别计算总分
     public void sumScore(){
-        G1M2.setTscore(G1M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
-        G1M2.setTscoreP2(G1M2.getTscoreP2()+3*sumArr(player2)-sumArr(player)-sumArr(player3)-sumArr(player4));
-        G1M2.setTscoreP3(G1M2.getTscoreP3()+3*sumArr(player3)-sumArr(player2)-sumArr(player)-sumArr(player4));
-        G1M2.setTscoreP4(G1M2.getTscoreP4()+3*sumArr(player4)-sumArr(player2)-sumArr(player3)-sumArr(player));
+        G2M2.setTscore(G2M2.getTscore()+3*sumArr(player)-sumArr(player2)-sumArr(player3)-sumArr(player4));
+        G2M2.setTscoreP2(G2M2.getTscoreP2()+3*sumArr(player2)-sumArr(player)-sumArr(player3)-sumArr(player4));
+        G2M2.setTscoreP3(G2M2.getTscoreP3()+3*sumArr(player3)-sumArr(player2)-sumArr(player)-sumArr(player4));
+        G2M2.setTscoreP4(G2M2.getTscoreP4()+3*sumArr(player4)-sumArr(player2)-sumArr(player3)-sumArr(player));
     }
 
     @FXML
@@ -469,7 +441,6 @@ public class G1M2Controller extends MainControl implements Initializable {
             testvalue = r.nextInt(4) + 14;
             testvalue2 = r.nextInt(3) + 14;
             testvalue3 = r.nextInt(2) + 14;
-            keepturn = true;
             gamekeep = true;
             warnLabel.setText("");
             score.setText("");
@@ -478,9 +449,7 @@ public class G1M2Controller extends MainControl implements Initializable {
             player3 = new ArrayList<Integer>();
             player4 = new ArrayList<Integer>();
             checkRepeat = new ArrayList<Integer>();
-            flipp2 = new ArrayList<Integer>();
-            flipp3 = new ArrayList<Integer>();
-            flipp4 = new ArrayList<Integer>();
+            flipping = new ArrayList<Integer>();
 
             //图片
             p1c1.setImage(null);
@@ -518,197 +487,118 @@ public class G1M2Controller extends MainControl implements Initializable {
             int num2 = getNum(rnum2);
             player2.add(num2);
             checkRepeat.add(rnum2);
-            flipp2.add(rnum2);
+            flipping.add(rnum2);
             player2Card = 1;
             int rnum3 = getNoRep(checkRepeat);
             int num3 = getNum(rnum3);
             player3.add(num3);
             checkRepeat.add(rnum3);
-            flipp3.add(rnum3);
+            flipping.add(rnum3);
             player3Card = 1;
             int rnum4 = getNoRep(checkRepeat);
             int num4 = getNum(rnum4);
             player4.add(num4);
             checkRepeat.add(rnum4);
-            flipp4.add(rnum4);
+            flipping.add(rnum4);
             player4Card = 1;
 
             setScore();
             //放图片
             p1c1.setImage(cardset.get(rnum1));
-            p2c1.setImage(cardset.get(rnum2));
-            p3c1.setImage(cardset.get(rnum3));
-            p4c1.setImage(cardset.get(rnum4));
-
-            showTurnNum();
+            p2c1.setImage(cardset.get(0));
+            p3c1.setImage(cardset.get(0));
+            p4c1.setImage(cardset.get(0));
         }
     }
 
-    public void ifGameOver() throws FileNotFoundException {
-        if(G1M2.getTurnNumber()>25) {
-            Stage stage2 = new Stage();
-            Label l = new Label();
-            if (G1M2.getTscore() == Math.max(G1M2.getTscoreP4(), Math.max(G1M2.getTscoreP3(), Math.max(G1M2.getTscore(), G1M2.getTscoreP2())))) {
-                l.setText("  You win! Your Score is: \n     "+G1M2.getTscore()
-                        +"\n  P2's score is: "+G1M2.getTscoreP2()
-                        +"\n  P3's score is: "+G1M2.getTscoreP3()
-                        +"\n  P4's score is: "+G1M2.getTscoreP4());
-            }else{
-                l.setText("  You Lose! Your Score is: \n     "+G1M2.getTscore()
-                        +"\n  P2's score is: "+G1M2.getTscoreP2()
-                        +"\n  P3's score is: "+G1M2.getTscoreP3()
-                        +"\n  P4's score is: "+G1M2.getTscoreP4());
-            }
-            VBox v = new VBox();
-            v.getChildren().add(l);
-            Scene newWindow = new Scene(v,200,100);
-            stage2.setTitle("Result");
-            stage2.setScene(newWindow);
-            stage2.show();
-            try(Scanner finp = new Scanner(new File("G1M2MaxAndMin.txt"))){
-                int max=0,min=0;
-                if(finp.hasNextInt()){
-                    max = finp.nextInt();
-                }else{
-                    max = 0;
-                }
-                if(finp.hasNextInt()){
-                    min = finp.nextInt();
-                }else{
-                    min = 0;
-                }
-                if(G1M2.getTscore()>max){
-                    PrintWriter fout = new PrintWriter(new File("G1M2MaxAndMin.txt"));
-                    fout.println(G1M2.getTscore());
-                    fout.println(min);
-                    fout.close();
-                }else if(G1M2.getTscore()<min){
-                    PrintWriter fout = new PrintWriter(new File("G1M2MaxAndMin.txt"));
-                    fout.println(max);
-                    fout.println(G1M2.getTscore());
-                    fout.close();
-                }
-            }catch(FileNotFoundException e){
-                PrintWriter fout = new PrintWriter(new File("G1M2MaxAndMin.txt"));
-                fout.println(G1M2.getTscore());
-                fout.println(G1M2.getTscore());
-                fout.close();
-            }
-
-            clearTscore();
-        }
-    }
     public void clearTscore() throws FileNotFoundException {
-        PrintWriter fout = new PrintWriter(new File("G1M2score.txt"));
-        G1M2.setTscore(0);
+        PrintWriter fout = new PrintWriter(new File("G2M2score.txt"));
+        G2M2.setTscore(0);
         fout.println(0);
-        G1M2.setTscoreP2(0);
+        G2M2.setTscoreP2(0);
         fout.println(0);
-        G1M2.setTscoreP3(0);
+        G2M2.setTscoreP3(0);
         fout.println(0);
-        G1M2.setTscoreP4(0);
+        G2M2.setTscoreP4(0);
         fout.println(0);
-        G1M2.setTurnNumber(0);
-        showTurnNum();
         setTscore();
         fout.close();
     }
     public void changeTscore() throws FileNotFoundException {
-        PrintWriter fout = new PrintWriter(new File("G1M2score.txt"));
-        fout.println(G1M2.getTscore());
-        fout.println(G1M2.getTscoreP2());
-        fout.println(G1M2.getTscoreP3());
-        fout.println(G1M2.getTscoreP4());
-        addTurnNum();
-        fout.println(G1M2.getTurnNumber());
+        PrintWriter fout = new PrintWriter(new File("G2M2score.txt"));
+        fout.println(G2M2.getTscore());
+        fout.println(G2M2.getTscoreP2());
+        fout.println(G2M2.getTscoreP3());
+        fout.println(G2M2.getTscoreP4());
         fout.close();
     }
 
     public void ifget21(int players){
         if(players==1){
             if(sumArr(player)==21){
-                G1M2.setTscore(G1M2.getTscore()+10);
+                G2M2.setTscore(G2M2.getTscore()+10);
                 ifnot21();
             }
         }else if(players==2){
             if(sumArr(player2)==21){
-                G1M2.setTscoreP2(G1M2.getTscoreP2()+10);
+                G2M2.setTscoreP2(G2M2.getTscoreP2()+10);
                 ifnot21();
             }
         }else if(players==3){
             if(sumArr(player3)==21){
-                G1M2.setTscoreP3(G1M2.getTscoreP3()+10);
+                G2M2.setTscoreP3(G2M2.getTscoreP3()+10);
                 ifnot21();
             }
         }else{
             if(sumArr(player4)==21){
-                G1M2.setTscoreP4(G1M2.getTscoreP4()+10);
+                G2M2.setTscoreP4(G2M2.getTscoreP4()+10);
                 ifnot21();
             }
         }
     }
 
     public void ifnot21(){
-            if(sumArr(player)!=21) {
-                G1M2.setTscore(G1M2.getTscore() - 4);
-            }
-            if(sumArr(player2)!=21){
-                G1M2.setTscoreP2(G1M2.getTscoreP2() - 4);
-            }
-            if(sumArr(player3)!=21){
-                G1M2.setTscoreP3(G1M2.getTscoreP3() - 4);
-            }
-            if(sumArr(player4)!=21) {
-                G1M2.setTscoreP4(G1M2.getTscoreP4() - 4);
-            }
+        if(sumArr(player)!=21) {
+            G2M2.setTscore(G2M2.getTscore() - 4);
+        }
+        if(sumArr(player2)!=21){
+            G2M2.setTscoreP2(G2M2.getTscoreP2() - 4);
+        }
+        if(sumArr(player3)!=21){
+            G2M2.setTscoreP3(G2M2.getTscoreP3() - 4);
+        }
+        if(sumArr(player4)!=21) {
+            G2M2.setTscoreP4(G2M2.getTscoreP4() - 4);
+        }
     }
 
-    public void flipcards(int players) {
-        int index = 1;
-        if(players==2){
-            for(int j:flipp2){
-                whichCard(index,2,j);
-                index++;
-            }
-        }else if(players==3){
-            for(int j:flipp3){
-                whichCard(index,players,j);
-                index++;
-            }
-        }else if(players==4){
-            for(int j:flipp4){
-                whichCard(index,players,j);
-                index++;
-            }
-        }
-    }
     @Override
     public void flipcard() {
-        for(int q=2;q<5;q++){
-            flipcards(q);
-        }
+        whichCard(1,2,flipping.get(0));
+        whichCard(1,3,flipping.get(1));
+        whichCard(1,4,flipping.get(2));
     }
 
     public void ifnotExplode(){
         if(!ifExplode(player)){
-            G1M2.setTscore(G1M2.getTscore()+3);
+            G2M2.setTscore(G2M2.getTscore()+3);
         }else{
-            G1M2.setTscore(G1M2.getTscore()-6);
+            G2M2.setTscore(G2M2.getTscore()-6);
         }
         if(!ifExplode(player2)){
-            G1M2.setTscoreP2(G1M2.getTscoreP2()+3);
+            G2M2.setTscoreP2(G2M2.getTscoreP2()+3);
         }else{
-            G1M2.setTscoreP2(G1M2.getTscoreP2()-6);
+            G2M2.setTscoreP2(G2M2.getTscoreP2()-6);
         }
         if(!ifExplode(player3)){
-            G1M2.setTscoreP3(G1M2.getTscoreP3()+3);
+            G2M2.setTscoreP3(G2M2.getTscoreP3()+3);
         }else{
-            G1M2.setTscoreP3(G1M2.getTscoreP3()-6);
+            G2M2.setTscoreP3(G2M2.getTscoreP3()-6);
         }
         if(!ifExplode(player4)){
-            G1M2.setTscoreP4(G1M2.getTscoreP4()+3);
+            G2M2.setTscoreP4(G2M2.getTscoreP4()+3);
         }else{
-            G1M2.setTscoreP4(G1M2.getTscoreP4()-6);
+            G2M2.setTscoreP4(G2M2.getTscoreP4()-6);
         }
     }
 
@@ -738,34 +628,6 @@ public class G1M2Controller extends MainControl implements Initializable {
         if(ifExplode(arr)){
             changeA(arr,p);
         }
-    }
-
-    public void displayScore() throws FileNotFoundException {
-        Stage scoreStage = new Stage();
-        VBox vScore = new VBox();
-        Label lmax = new Label();Label lmin = new Label();
-        try(Scanner finp = new Scanner(new File("G1M2MaxAndMin.txt"))){
-            if(finp.hasNextInt()){
-                lmax.setText("Your Max Score: "+finp.nextInt());
-            }else{
-                lmax.setText("Your Max Score: No Record");
-            }
-            if(finp.hasNextInt()){
-                lmin.setText("Your Min Score: "+finp.nextInt());
-            }else{
-                lmin.setText("Your Min Score: No Record");
-            }
-        }catch(FileNotFoundException e){
-            lmax.setText("Your Max Score: No Record");
-            lmin.setText("Your Min Score: No Record");
-        }
-        vScore.getChildren().add(lmax);
-        vScore.getChildren().add(lmin);
-        vScore.setAlignment(Pos.CENTER);
-        Scene scoreSc = new Scene(vScore,200,80);
-        scoreStage.setScene(scoreSc);
-        scoreStage.setTitle("Score Record");
-        scoreStage.show();
     }
 
     @Override
